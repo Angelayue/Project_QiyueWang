@@ -1,0 +1,93 @@
+Report
+Qiyue Wang
+
+Note1: please use CSElabs machines (kh4250,kh2170 or lind40) to test my code!
+
+The way to compile
+
+step1: extract my tar file
+step2: open terminal, in the file directory, type make
+step3: put the execute peer file to the folder peer1 peer2 peer3 ...
+
+(I've already make all the file and put it in the corresponding folder, you don't need to re-compile it.)
+
+The way to run:
+
+For central server, in terminal type
+ 
+	./central-server 20000
+In my terminal, it looks like : wang3090@lind40-07 (/home/wang3090/Desktop/csci5211) % ./central-server 20000
+
+For peer:
+
+In directory peer1 (or anyother peer folder), in terminal type
+
+	./peer ~/Desktop/csci5211/peer3 lind40-07.cselabs.umn.edu 20000
+	"~/Desktop/csci5211/peer1" is the pathname
+	"lind40-07.cselabs.umn.edu" is where the central server runs
+	"20000" is the port number
+
+After enter the commond, the central server will show the following result
+
+	new peer join! 0 th node 134.84.62.109
+
+When the second peer B join, 
+
+The connecting peer B will show:
+
+	new peer join! 0 th node 134.84.62.108 with port 20000
+	hello my following peer!
+	
+	(means it successfully connect to A)
+
+The central server will show: 
+	new peer join! 1 th node 134.84.62.106 
+	r_index is 0 
+	
+	(r_index means the random picked peer A to connect)
+
+The connected peer A will show
+
+	start accept!!
+	request_for_peer_network_connection:20001
+	new peer join! 0 th node 134.84.62.106 with port 20001
+	
+	(means it accept the connection)
+
+In peer commond line
+
+Quit:
+	if you want to quit this peer: type "quit" in peer terminal:
+	it will show "sucessfully quit!", means this peer succussfully quit the network
+
+	The peer which connect to it will show 
+	
+		Quit_from_peer_network_connection:20001
+		admin: disconnected from '134.84.62.106(20001)'
+		find in 0th elements of the table,Delete it!
+	
+	The central server will show: 
+
+		admin: disconnected from '134.84.62.106(20001)'
+		find in 1th elements of the table,Delete it!
+
+List:
+	if you want to list the files that this peer have: type "list" in peer terminal:
+	it will show 
+	doc2.txt  peer
+	get the files in the shared list
+
+Get:
+	if you want to get the file from another peer, type "get filename.txt" (for example "get doc3.txt")
+	After it shows "Ok received from client!", you successfully get the file.
+	if it shows "time out", means there maybe no such file in the peer network.
+
+Share:
+	if you want to share the file with another peer, type something like"share doc1.txt lind40-08.cselabs.umn.edu"
+	After it shows 
+		find in 0th elements of the table
+		Ok File doc1.txt from host was sent!
+	You successfully share the file to other peer.
+
+
+
